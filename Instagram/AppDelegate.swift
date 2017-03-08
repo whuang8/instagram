@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Display home page if user is already logged in
         if PFUser.current() != nil {
-            let vc = storyboard.instantiateViewController(withIdentifier: "homeNavigationController")
+            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController")
             window?.rootViewController = vc
         }
         
