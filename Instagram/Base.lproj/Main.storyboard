@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="b0p-G0-NPE">
             <objects>
-                <viewController id="OuT-Ep-U7N" sceneMemberID="viewController">
+                <viewController id="OuT-Ep-U7N" customClass="HomeViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zym-vR-Y4C"/>
                         <viewControllerLayoutGuide type="bottom" id="tUO-wq-m8j"/>
@@ -84,7 +84,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lLr-c4-Unh"/>
+                    <navigationItem key="navigationItem" id="lLr-c4-Unh">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3JI-9c-uzi">
+                            <connections>
+                                <action selector="logoutButtonTapped:" destination="OuT-Ep-U7N" id="I6j-He-klr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmI-RY-4y2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,7 +99,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TNT-Sx-rAB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Uq-fk-nhp" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="homeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="4Uq-fk-nhp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LAY-UW-SJE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

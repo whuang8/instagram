@@ -17,9 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
         // Initialize Parse
-        // Set applicationId and server based on the values in the Heroku settings.
-        // clientKey is not used on Parse open source unless explicitly configured
         Parse.initialize(
             with: ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "Instagram"
@@ -27,6 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://whinstagram.herokuapp.com/parse"
             })
         )
+        
+        // Display home page if user is already logged in
+        if PFUser.current() != nil {
+            let vc = storyboard.instantiateViewController(withIdentifier: "homeNavigationController")
+            window?.rootViewController = vc
+        }
+        
+        // Display login page on logout
+        NotificationCenter.default.addObserver(forName: PFUser.userDidLogoutNotification, object: nil, queue: OperationQueue.main) { (Notification) in
+            let vc = storyboard.instantiateInitialViewController()
+            self.window?.rootViewController = vc
+        }
+        
         return true
     }
 
