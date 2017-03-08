@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
     func getPosts() {
         Post.getPosts(success: { (posts: [Post]) in
             self.posts = posts
+            self.tableView.reloadData()
         }) { (error: Error?) in
             print("error: \(error?.localizedDescription)")
         }
@@ -65,6 +66,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
+        let post = posts[indexPath.row]
+        cell.post = post
         return cell
     }
 }

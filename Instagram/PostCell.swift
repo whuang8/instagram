@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class PostCell: UITableViewCell {
 
+    @IBOutlet weak var postImageView: PFImageView!
+    var post: Post! {
+        didSet {
+            self.postImageView.file = post.media
+            self.postImageView.loadInBackground()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
