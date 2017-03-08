@@ -11,6 +11,21 @@ import Parse
 
 class Post: NSObject {
     
+    var media: PFFile
+    var author: PFUser
+    var caption: String?
+    var likesCount: Int
+    var commentsCount: Int
+    
+    init(pfObject: PFObject) {
+        self.media = pfObject["media"] as! PFFile
+        self.author = pfObject["author"] as! PFUser
+        self.caption = pfObject["caption"] as? String
+        self.likesCount = pfObject["likesCount"] as! Int
+        self.commentsCount = pfObject["commentsCount"] as! Int
+    }
+    
+    
     /**
      Method to add a user post to Parse (uploading image file)
      
@@ -49,6 +64,45 @@ class Post: NSObject {
             }
         }
         return nil
+    }
+    
+    /**
+     Method to fetch the most recent 20 posts on the server
+     
+     - parameter posts: Closure to be executed with the received posts from the query
+     - parameter error: Closure to be executed with an optional error
+     */
+    class func getPosts(success: @escaping ([Post]) -> (), failure: @escaping (Error?) -> ()) {
+        // construct PFQuery
+        let query = PFQuery(className: "Post")
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        query.limit = 20
+        
+        // fetch data asynchronously
+        query.findObjectsInBackground { (pfObjects: [PFObject]?, error: Error?) in
+            if let pfObjects = pfObjects {
+                let posts = constructPostsArray(pfObjects: pfObjects)
+                success(posts)
+            } else {
+                failure(error)
+            }
+        }
+    }
+    
+    /**
+     Method to convert an array of PFObjects to an array of Posts
+     
+     - parameter pfObjects: An array of pfObjects to be constructed into Posts
+     
+     - returns: An array of Posts
+     */
+    class func constructPostsArray(pfObjects: [PFObject]) -> [Post] {
+        var posts: [Post] = []
+        for pfObject in pfObjects {
+            posts.append(Post(pfObject: pfObject))
+        }
+        return posts
     }
     
     func resize(image: UIImage, newSize: CGSize) -> UIImage {

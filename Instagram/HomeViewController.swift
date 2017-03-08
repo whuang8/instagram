@@ -11,14 +11,27 @@ import Parse
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    var posts: [Post] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        getPosts()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getPosts() {
+        Post.getPosts(success: { (posts: [Post]) in
+            self.posts = posts
+        }) { (error: Error?) in
+            print("error: \(error?.localizedDescription)")
+        }
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
@@ -41,4 +54,17 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+// UITableView methods
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return posts.count
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
+        return cell
+    }
 }
