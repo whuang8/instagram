@@ -12,12 +12,16 @@ import Parse
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var refreshControl: UIRefreshControl!
     var posts: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(getPosts), for: .valueChanged)
+        self.tableView.addSubview(refreshControl)
         getPosts()
     }
 
@@ -30,6 +34,7 @@ class HomeViewController: UIViewController {
         Post.getPosts(success: { (posts: [Post]) in
             self.posts = posts
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
         }) { (error: Error?) in
             print("error: \(error?.localizedDescription)")
         }
