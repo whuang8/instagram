@@ -40,6 +40,9 @@ class CameraViewController: UIViewController {
                 MBProgressHUD.hide(for: self.view, animated: true)
                 self.postImageView.image = nil
                 self.tabBarController?.selectedIndex = 0
+            } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                print("error: \(error)")
             }
         }
     }

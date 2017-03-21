@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
@@ -25,12 +26,15 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onLogin(_ sender: Any) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         let username = usernameField.text
         let password = passwordField.text
         PFUser.logInWithUsername(inBackground: username!, password: password!) { (user: PFUser?, error: Error?) in
             if let error = error {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 print("error: \(error.localizedDescription)")
             } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 print("logged in")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
@@ -38,14 +42,17 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func onSignup(_ sender: Any) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         let newUser = PFUser()
         newUser.username = usernameField.text
         newUser.password = passwordField.text
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("user regitration successful")
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
                 print("error: \(error?.localizedDescription)")
             }
         }

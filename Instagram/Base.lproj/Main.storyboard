@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number, username or email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5P-iM-geI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5P-iM-geI">
                                 <rect key="frame" x="43" y="147" width="291" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -72,7 +72,7 @@
             </objects>
             <point key="canvasLocation" x="974" y="-627"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Instagram-->
         <scene sceneID="b0p-G0-NPE">
             <objects>
                 <viewController id="OuT-Ep-U7N" customClass="HomeViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -158,7 +158,7 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lLr-c4-Unh">
+                    <navigationItem key="navigationItem" title="Instagram" id="lLr-c4-Unh">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="3JI-9c-uzi">
                             <connections>
                                 <action selector="logoutButtonTapped:" destination="OuT-Ep-U7N" id="I6j-He-klr"/>
@@ -231,7 +231,7 @@
         <scene sceneID="TNT-Sx-rAB">
             <objects>
                 <navigationController storyboardIdentifier="homeNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="4Uq-fk-nhp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="YLO-hL-vGM"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="YLO-hL-vGM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LAY-UW-SJE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -250,7 +250,7 @@
         <scene sceneID="3d3-Nd-E8F">
             <objects>
                 <navigationController storyboardIdentifier="cameraNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="7F1-YJ-Lz3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Camera" id="HLf-Da-j3o"/>
+                    <tabBarItem key="tabBarItem" title="Camera" image="add" id="HLf-Da-j3o"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rzF-3b-gDb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -285,4 +285,8 @@
             <point key="canvasLocation" x="1913" y="-627"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add" width="24" height="24"/>
+        <image name="home" width="24" height="27"/>
+    </resources>
 </document>
