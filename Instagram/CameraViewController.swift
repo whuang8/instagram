@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CameraViewController: UIViewController {
 
@@ -33,9 +34,13 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         Post.postUserImage(image: postImageView.image, withCaption: captionView.text) { (success: Bool, error: Error?) in
-            self.postImageView.image = nil
-            self.tabBarController?.selectedIndex = 0
+            if success {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.postImageView.image = nil
+                self.tabBarController?.selectedIndex = 0
+            }
         }
     }
 
